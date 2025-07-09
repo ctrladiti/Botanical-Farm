@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Virtual Herbal Garden</title>
+  <link rel="stylesheet" href="stylegarden.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <div class="garden-bg-overlay"></div>
+
+  <header class="garden-header">
+    <div class="header-content">
+      <h1>🌿 Explore the Herbal Garden</h1>
+      <p>Choose a category to discover plants used in traditional AYUSH healing systems.</p>
+    </div>
+    <a href="index.html" class="back-home-btn">← Home</a>
+  </header>
+
+  <section id="search-section">
+    <input 
+      type="text" 
+      id="search" 
+      placeholder="Search categories by name (e.g., skin, immunity)..." 
+    />
+    <p class="click-tip"><i class="fas fa-leaf"></i> Click a category card to view plants</p>
+  </section>
+
+  <section class="carousel-wrapper">
+    <button id="arrow-left" class="carousel-arrow"><i class="fas fa-chevron-left"></i></button>
+  
+    <div id="category-carousel" class="carousel-container">
+    </div>
+  
+    <button id="arrow-right" class="carousel-arrow"><i class="fas fa-chevron-right"></i></button>
+  </section>
+  
+
+  <main>
+    <div id="plant-container" class="plant-grid"></div>
+  </main>
+
+  <div id="plant-modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="close-btn">&times;</span>
+      <img id="modal-img" src="" alt="Plant image" />
+      <h2 id="modal-name"></h2>
+      <p id="modal-botanical"></p>
+      <p id="modal-uses"></p>
+      <p id="modal-habitat"></p>
+      <audio id="modal-audio" controls></audio>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Virtual Herbal Garden</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+[
+    {
+      "name": "Tulsi",
+      "botanical": "Ocimum tenuiflorum",
+      "image": "images/tulsi.jpg",
+      "uses": "Boosts immunity, relieves cold and cough",
+      "habitat": "Tropical and subtropical regions",
+      "audio": "audio/tulsi.mp3",
+      "category": "immunity"
+    },
+    {
+      "name": "Amla",
+      "botanical": "Phyllanthus emblica",
+      "image": "images/amla.jpg",
+      "uses": "Rich in Vitamin C, enhances immunity and digestion",
+      "habitat": "India and Southeast Asia",
+      "audio": "audio/amla.mp3",
+      "category": "immunity"
+    },
+    {
+      "name": "Giloy",
+      "botanical": "Tinospora cordifolia",
+      "image": "images/giloy.jpg",
+      "uses": "Immunity booster, antipyretic, detoxifies blood",
+      "habitat": "Tropical regions in India",
+      "audio": "audio/giloy.mp3",
+      "category": "immunity"
+    },
+    {
+      "name": "Aloe Vera",
+      "botanical": "Aloe barbadensis",
+      "image": "images/aloe_vera.jpg",
+      "uses": "Heals burns, moisturizes skin, aids digestion",
+      "habitat": "Dry and warm climates",
+      "audio": "audio/aloe.mp3",
+      "category": "skin"
+    },
+    {
+      "name": "Neem",
+      "botanical": "Azadirachta indica",
+      "image": "images/neem.jpg",
+      "uses": "Treats acne, antifungal, purifies blood",
+      "habitat": "Throughout Indian subcontinent",
+      "audio": "audio/neem.mp3",
+      "category": "skin"
+    },
+    {
+      "name": "Turmeric",
+      "botanical": "Curcuma longa",
+      "image": "images/turmeric.jpg",
+      "uses": "Anti-inflammatory, skin brightening, healing wounds",
+      "habitat": "Tropical South Asia",
+      "audio": "audio/turmeric.mp3",
+      "category": "skin"
+    },
+    {
+      "name": "Triphala",
+      "botanical": "Combination of Amalaki, Bibhitaki, Haritaki",
+      "image": "images/triphala.jpg",
+      "uses": "Improves digestion, detoxifies body",
+      "habitat": "Cultivated across India",
+      "audio": "audio/triphala.mp3",
+      "category": "digestion"
+    },
+    {
+      "name": "Peppermint",
+      "botanical": "Mentha piperita",
+      "image": "images/peppermint.jpg",
+      "uses": "Relieves indigestion, gas, and nausea",
+      "habitat": "Temperate regions",
+      "audio": "audio/peppermint.mp3",
+      "category": "digestion"
+    },
+    {
+      "name": "Fennel",
+      "botanical": "Foeniculum vulgare",
+      "image": "images/fennel.jpg",
+      "uses": "Eases bloating, aids digestion, freshens breath",
+      "habitat": "Europe and Asia",
+      "audio": "audio/fennel.mp3",
+      "category": "digestion"
+    },
+    {
+      "name": "Ashwagandha",
+      "botanical": "Withania somnifera",
+      "image": "images/ashwagandha.jpg",
+      "uses": "Relieves stress, boosts energy, enhances sleep",
+      "habitat": "Dry regions of India and North Africa",
+      "audio": "audio/ashwagandha.mp3",
+      "category": "nervine"
+    },
+    {
+      "name": "Brahmi",
+      "botanical": "Bacopa monnieri",
+      "image": "images/brahmi.jpg",
+      "uses": "Improves memory, reduces anxiety",
+      "habitat": "Wetlands of India and Asia",
+      "audio": "audio/brahmi.mp3",
+      "category": "nervine"
+    },
+    {
+      "name": "Shankhpushpi",
+      "botanical": "Convolvulus pluricaulis",
+      "image": "images/shankhpushpi.jpg",
+      "uses": "Promotes mental health and clarity",
+      "habitat": "Subtropical India",
+      "audio": "audio/shankhpushpi.mp3",
+      "category": "nervine"
+    },
+    {
+      "name": "Ginger",
+      "botanical": "Zingiber officinale",
+      "image": "images/ginger.jpg",
+      "uses": "Relieves nausea, sore throat, cold",
+      "habitat": "South Asia and Africa",
+      "audio": "audio/ginger.mp3",
+      "category": "respiratory"
+    },
+    {
+      "name": "Licorice",
+      "botanical": "Glycyrrhiza glabra",
+      "image": "images/licorice.jpg",
+      "uses": "Soothes throat, supports lungs",
+      "habitat": "Mediterranean and Asia",
+      "audio": "audio/licorice.mp3",
+      "category": "respiratory"
+    },
+    {
+      "name": "Mulethi",
+      "botanical": "Glycyrrhiza glabra",
+      "image": "images/mulethi.jpg",
+      "uses": "Eases cough and cold, anti-inflammatory",
+      "habitat": "India and China",
+      "audio": "audio/mulethi.mp3",
+      "category": "respiratory"
+    }
+  ]
+  

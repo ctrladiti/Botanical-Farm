@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Medicinal Plants</title>
+  <link rel="stylesheet" href="stylecategory.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+  <header class="category-header">
+    <div class="header-content">
+      <h1 id="category-title">🌿 Medicinal Plants</h1>
+      <p id="category-description">Explore herbs used in this category</p>
+    </div>
+    <a href="garden.html" class="back-categories-btn"><i class="fas fa-arrow-left"></i> Back to Categories</a>
+  </header>
+
+  <main>
+    <div id="plant-grid" class="plant-grid"></div>
+  </main>
+
+  <div id="plant-modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="close-btn">&times;</span>
+      <img id="modal-img" src="" alt="Plant image" />
+      <h2 id="modal-name"></h2>
+      <p id="modal-botanical"></p>
+      <p id="modal-uses"></p>
+      <p id="modal-habitat"></p>
+      <audio id="modal-audio" controls></audio>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Virtual Herbal Garden</p>
+  </footer>
+
+  <script src="category.js"></script>
+</body>
+</html>
