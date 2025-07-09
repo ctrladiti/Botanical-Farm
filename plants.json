@@ -29,7 +29,7 @@
     {
       "name": "Aloe Vera",
       "botanical": "Aloe barbadensis",
-      "image": "images/aloe_vera.jpg",
+      "image": "images/aloevera.jpg",
       "uses": "Heals burns, moisturizes skin, aids digestion",
       "habitat": "Dry and warm climates",
       "audio": "audio/aloe.mp3",
@@ -54,13 +54,31 @@
       "category": "skin"
     },
     {
-      "name": "Triphala",
-      "botanical": "Combination of Amalaki, Bibhitaki, Haritaki",
-      "image": "images/triphala.jpg",
-      "uses": "Improves digestion, detoxifies body",
-      "habitat": "Cultivated across India",
-      "audio": "audio/triphala.mp3",
-      "category": "digestion"
+      "name": "Manjistha",
+      "botanical": "Rubia cordifolia",
+      "image": "images/manjistha.jpg",
+      "uses": "Purifies blood, clears acne and pigmentation, improves skin tone.",
+      "habitat": "Himalayan regions and other hill forests of India.",
+      "audio": "audio/manjistha.mp3",
+      "category": "skin"
+    },
+    {
+      "name": "Kumkumadi",
+      "botanical": "Herbal formulation (includes saffron, sandalwood, turmeric, etc.)",
+      "image": "images/kumkumadi.jpg",
+      "uses": "Rejuvenates skin, brightens complexion, removes dark spots.",
+      "habitat": "Traditionally prepared from Himalayan and southern Indian herbs.",
+      "audio": "audio/kumkumadi.mp3",
+      "category": "skin"
+    },
+    {
+      "name": "Calendula",
+      "botanical": "Calendula officinalis",
+      "image": "images/calendula.jpg",
+      "uses": "Soothes dry skin, treats cuts, scrapes, and minor skin infections.",
+      "habitat": "Native to Mediterranean regions, cultivated in India as well.",
+      "audio": "audio/calendula.mp3",
+      "category": "skin"
     },
     {
       "name": "Peppermint",
@@ -101,7 +119,7 @@
     {
       "name": "Shankhpushpi",
       "botanical": "Convolvulus pluricaulis",
-      "image": "images/shankhpushpi.jpg",
+      "image": "images/shankpushpi.webp",
       "uses": "Promotes mental health and clarity",
       "habitat": "Subtropical India",
       "audio": "audio/shankhpushpi.mp3",
@@ -126,12 +144,39 @@
       "category": "respiratory"
     },
     {
-      "name": "Mulethi",
-      "botanical": "Glycyrrhiza glabra",
-      "image": "images/mulethi.jpg",
-      "uses": "Eases cough and cold, anti-inflammatory",
-      "habitat": "India and China",
-      "audio": "audio/mulethi.mp3",
+      "name": "Tulsi",
+      "botanical": "Ocimum tenuiflorum",
+      "image": "images/tulsi.jpg",
+      "uses": "Boosts immunity, relieves cough and cold, and clears respiratory tract.",
+      "habitat": "Widely cultivated in tropical climates of India.",
+      "audio": "audio/tulsi.mp3",
+      "category": "respiratory"
+    },
+    {
+      "name": "Vasaka",
+      "botanical": "Justicia adhatoda",
+      "image": "images/vasaka.jpg",
+      "uses": "Effective in bronchitis, asthma, and clearing phlegm. Natural expectorant.",
+      "habitat": "Common in lower Himalayan regions and throughout India.",
+      "audio": "audio/vasaka.mp3",
+      "category": "respiratory"
+    },
+    {
+      "name": "Pippali",
+      "botanical": "Piper longum",
+      "image": "images/pippali.jpg",
+      "uses": "Clears blocked respiratory channels and improves lung function.",
+      "habitat": "Grows in tropical forests of India and Southeast Asia.",
+      "audio": "audio/pippali.mp3",
+      "category": "respiratory"
+    },
+    {
+      "name": "Cardamom",
+      "botanical": "Elettaria cardamomum",
+      "image": "images/cardamom.jpg",
+      "uses": "Relieves congestion and helps with asthma and bronchitis.",
+      "habitat": "Grows in southern India and Sri Lanka, especially Western Ghats.",
+      "audio": "audio/cardamom.mp3",
       "category": "respiratory"
     }
   ]
