@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Herbal Garden - Medicinal Plants</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            color: #2c3e50;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(90deg, #00897b, #00796b);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: #81c784;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: #00695c;
+            padding: 0.8rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #4db6ac;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .plants-header {
+            background: linear-gradient(rgba(0, 137, 123, 0.9), rgba(0, 121, 107, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="%2300897b"/></svg>');
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .plants-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .plants-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+
+        .search-container {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #b2dfdb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #00897b;
+        }
+
+        .search-box button {
+            background-color: #00897b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-box button:hover {
+            background-color: #00695c;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background-color: #e0f2f1;
+            border: 1px solid #b2dfdb;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #4db6ac;
+            color: white;
+        }
+
+        .plants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 3rem;
+        }
+
+        .plant-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .plant-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .plant-image {
+            height: 200px;
+            background-color: #e8f5e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plant-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .plant-card:hover .plant-image img {
+            transform: scale(1.05);
+        }
+
+        .plant-info {
+            padding: 1.5rem;
+        }
+
+        .plant-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #00695c;
+        }
+
+        .plant-common {
+            font-style: italic;
+            color: #78909c;
+            margin-bottom: 1rem;
+        }
+
+        .plant-uses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .use-tag {
+            background-color: #e0f2f1;
+            color: #00695c;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .view-3d {
+            display: inline-block;
+            background-color: #00897b;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .view-3d:hover {
+            background-color: #00695c;
+        }
+
+        .plant-detail-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .plant-detail-content {
+            background-color: white;
+            border-radius: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            background: linear-gradient(90deg, #00897b, #00796b);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .plant-header {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .plant-image-large {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .plant-image-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .plant-header-info {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .plant-scientific {
+            font-style: italic;
+            color: #78909c;
+            margin-bottom: 1rem;
+        }
+
+        .plant-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .detail-tag {
+            background-color: #e0f2f1;
+            color: #00695c;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .plant-header-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #00897b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .action-btn:hover {
+            background-color: #00695c;
+        }
+
+        .action-btn i {
+            font-size: 1rem;
+        }
+
+        .plant-details-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .detail-card {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .detail-card h3 {
+            font-size: 1.3rem;
+            color: #00695c;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-card p {
+            line-height: 1.6;
+            color: #546e7a;
+        }
+
+        .detail-card ul {
+            padding-left: 20px;
+            margin-top: 0.5rem;
+        }
+
+        .detail-card li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .model-viewer {
+            margin-top: 1.5rem;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            background-color: #e8f5e9;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .model-placeholder {
+            font-size: 3rem;
+            color: #b2dfdb;
+        }
+
+        .model-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .control-btn {
+            background-color: #e0f2f1;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .control-btn:hover {
+            background-color: #4db6ac;
+            color: white;
+        }
+
+        .similar-plants {
+            margin-top: 2rem;
+        }
+
+        .similar-plants h3 {
+            font-size: 1.3rem;
+            color: #00695c;
+            margin-bottom: 1rem;
+        }
+
+        .similar-plants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .similar-plant-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .similar-plant-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .similar-plant-image {
+            height: 120px;
+            overflow: hidden;
+        }
+
+        .similar-plant-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .similar-plant-card:hover .similar-plant-image img {
+            transform: scale(1.05);
+        }
+
+        .similar-plant-info {
+            padding: 0.8rem;
+        }
+
+        .similar-plant-name {
+            font-weight: 600;
+            color: #00695c;
+            margin-bottom: 0.2rem;
+            font-size: 0.9rem;
+        }
+
+        .similar-plant-common {
+            font-style: italic;
+            font-size: 0.8rem;
+            color: #78909c;
+        }
+
+        footer {
+            background-color: #00695c;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: #b2dfdb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .plants-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .plant-detail-content {
+                width: 95%;
+            }
+            
+            .modal-body {
+                padding: 1.5rem;
+            }
+            
+            .plant-header {
+                flex-direction: column;
+            }
+            
+            .plant-image-large {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-leaf"></i>
+            <h1>Virtual Herbal Garden</h1>
+        </div>
+        <p class="subtitle">Explore the world of AYUSH medicinal plants in an interactive 3D environment</p>
+    </header>
+    
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#" class="active">Plants</a>
+        <a href="virtual_tours.html">Virtual Tours</a>
+        <a href="#">About AYUSH</a>
+        <a href="#">Resources</a>
+    </nav>
+    
+    <div class="container">
+        <section class="plants-header">
+            <h2>Medicinal Plants Database</h2>
+            <p>Explore our comprehensive collection of medicinal plants used in AYUSH (Ayurveda, Yoga & Naturopathy, Unani, Siddha, and Homeopathy) systems. Learn about their properties, uses, and cultivation methods.</p>
+        </section>
+        
+        <section class="search-container">
+            <div class="search-box">
+                <input type="text" placeholder="Search for medicinal plants...">
+                <button><i class="fas fa-search"></i> Search</button>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active">All Plants</button>
+                <button class="filter-btn">Ayurveda</button>
+                <button class="filter-btn">Unani</button>
+                <button class="filter-btn">Siddha</button>
+                <button class="filter-btn">Homeopathy</button>
+                <button class="filter-btn">Immunity</button>
+                <button class="filter-btn">Digestive Health</button>
+                <button class="filter-btn">Skin Care</button>
+                <button class="filter-btn">Respiratory</button>
+                <button class="filter-btn">Anti-inflammatory</button>
+            </div>
+        </section>
+        
+        <section class="plants-grid">
+            <!-- Plant Card 1 -->
+            <div class="plant-card" onclick="showPlantDetails(1)">
+                <div class="plant-image">
+                    <img src="https://images.unsplash.com/photo-1549069840-fca68e9b320f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Tulsi">
+                </div>
+                <div class="plant-info">
+                    <h3 class="plant-name">Tulsi</h3>
+                    <p class="plant-common">Ocimum tenuiflorum</p>
+                    <div class="plant-uses">
+                        <span class="use-tag">Immunity</span>
+                        <span class="use-tag">Respiratory</span>
+                        <span class="use-tag">Ayurveda</span>
+                    </div>
+                    <a href="#" class="view-3d" onclick="showPlantDetails(1); return false;">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Plant Card 2 -->
+            <div class="plant-card" onclick="showPlantDetails(2)">
+                <div class="plant-image">
+                    <img src="https://images.unsplash.com/photo-1605801877042-9a4c1c2e0d5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Amla">
+                </div>
+                <div class="plant-info">
+                    <h3 class="plant-name">Amla</h3>
+                    <p class="plant-common">Phyllanthus emblica</p>
+                    <div class="plant-uses">
+                        <span class="use-tag">Digestive</span>
+                        <span class="use-tag">Antioxidant</span>
+                        <span class="use-tag">Ayurveda</span>
+                    </div>
+                    <a href="#" class="view-3d" onclick="showPlantDetails(2); return false;">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Plant Card 3 -->
+            <div class="plant-card" onclick="showPlantDetails(3)">
+                <div class="plant-image">
+                    <img src="https://images.unsplash.com/photo-1587588354452-7a8f3fb74c0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Neem">
+                </div>
+                <div class="plant-info">
+                    <h3 class="plant-name">Neem</h3>
+                    <p class="plant-common">Azadirachta indica</p>
+                    <div class="plant-uses">
+                        <span class="use-tag">Skin Care</span>
+                        <span class="use-tag">Anti-inflammatory</span>
+                        <span class="use-tag">Ayurveda</span>
+                    </div>
+                    <a href="#" class="view-3d" onclick="showPlantDetails(3); return false;">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Plant Card 4 -->
+            <div class="plant-card" onclick="showPlantDetails(4)">
+                <div class="plant-image">
+                    <img src="https://images.unsplash.com/photo-1594381890389-814f9a8a8b0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ashwagandha">
+                </div>
+                <div class="plant-info">
+                    <h3 class="plant-name">Ashwagandha</h3>
+                    <p class="plant-common">Withania somnifera</p>
+                    <div class="plant-uses">
+                        <span class="use-tag">Stress</span>
+                        <span class="use-tag">Adaptogen</span>
+                        <span class="use-tag">Ayurveda</span>
+                    </div>
+                    <a href="#" class="view-3d" onclick="showPlantDetails(4); return false;">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Plant Card 5 -->
+            <div class="plant-card" onclick="showPlantDetails(5)">
+                <div class="plant-image">
+                    <img src="https://images.unsplash.com/photo-1620921234393-3a058e2d98b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Turmeric">
+                </div>
+                <div class="plant-info">
+                    <h3 class="plant-name">Turmeric</h3>
+                    <p class="plant-common">Curcuma longa</p>
+                    <div class="plant-uses">
+                        <span class="use-tag">Anti-inflammatory</span>
+                        <span class="use-tag">Joint Health</span>
+                        <span class="use-tag">Ayurveda</span>
+                    </div>
+                    <a href="#" class="view-3d" onclick="showPlantDetails(5); return false;">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Plant Card 6 -->
+            <div class="plant-card" onclick="showPlantDetails(6)">
+                <div class="plant-image">
+                    <img src="https://images.unsplash.com/photo-1519452635265-7b1fbfd1e3a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ginger">
+                </div>
+                <div class="plant-info">
+                    <h3 class="plant-name">Ginger</h3>
+                    <p class="plant-common">Zingiber officinale</p>
+                    <div class="plant-uses">
+                        <span class="use-tag">Digestive</span>
+                        <span class="use-tag">Nausea</span>
+                        <span class="use-tag">Ayurveda</span>
+                    </div>
+                    <a href="#" class="view-3d" onclick="showPlantDetails(6); return false;">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Plant Card 7 -->
+            <div class="plant-card" onclick="showPlantDetails(7)">
+                <div class="plant-image">
+                    <img src="https://images.unsplash.com/photo-1594381832295-4b12a6b6d0c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Giloy">
+                </div>
+                <div class="plant-info">
+                    <h3 class="plant-name">Giloy</h3>
+                    <p class="plant-common">Tinospora cordifolia</p>
+                    <div class="plant-uses">
+                        <span class="use-tag">Immunity</span>
+                        <span class="use-tag">Fever</span>
+                        <span class="use-tag">Ayurveda</span>
+                    </div>
+                    <a href="#" class="view-3d" onclick="showPlantDetails(7); return false;">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Plant Card 8 -->
+            <div class="plant-card" onclick="showPlantDetails(8)">
+                <div class="plant-image">
+                    <img src="https://images.unsplash.com/photo-1594381937-7948f3a0b3a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Brahmi">
+                </div>
+                <div class="plant-info">
+                    <h3 class="plant-name">Brahmi</h3>
+                    <p class="plant-common">Bacopa monnieri</p>
+                    <div class="plant-uses">
+                        <span class="use-tag">Cognitive</span>
+                        <span class="use-tag">Memory</span>
+                        <span class="use-tag">Ayurveda</span>
+                    </div>
+                    <a href="#" class="view-3d" onclick="showPlantDetails(8); return false;">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Plant Card 9 -->
+            <div class="plant-card" onclick="showPlantDetails(9)">
+                <div class="plant-image">
+                    <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Triphala">
+                </div>
+                <div class="plant-info">
+                    <h3 class="plant-name">Triphala</h3>
+                    <p class="plant-common">Amla, Bibhitaki, Haritaki</p>
+                    <div class="plant-uses">
+                        <span class="use-tag">Digestive</span>
+                        <span class="use-tag">Detox</span>
+                        <span class="use-tag">Ayurveda</span>
+                    </div>
+                    <a href="#" class="view-3d" onclick="showPlantDetails(9); return false;">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Plant Card 10 -->
+            <div class="plant-card" onclick="showPlantDetails(10)">
+                <div class="plant-image">
+                    <img src="https://images.unsplash.com/photo-1594381890389-814f9a8a8b0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Licorice">
+                </div>
+                <div class="plant-info">
+                    <h3 class="plant-name">Licorice</h3>
+                    <p class="plant-common">Glycyrrhiza glabra</p>
+                    <div class="plant-uses">
+                        <span class="use-tag">Respiratory</span>
+                        <span class="use-tag">Anti-inflammatory</span>
+                        <span class="use-tag">Ayurveda</span>
+                    </div>
+                    <a href="#" class="view-3d" onclick="showPlantDetails(10); return false;">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Plant Card 11 -->
+            <div class="plant-card" onclick="showPlantDetails(11)">
+                <div class="plant-image">
+                    <img src="https://images.unsplash.com/photo-1615875272961-5a6eb3b1f9a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fenugreek">
+                </div>
+                <div class="plant-info">
+                    <h3 class="plant-name">Fenugreek</h3>
+                    <p class="plant-common">Trigonella foenum-graecum</p>
+                    <div class="plant-uses">
+                        <span class="use-tag">Digestive</span>
+                        <span class="use-tag">Blood Sugar</span>
+                        <span class="use-tag">Ayurveda</span>
+                    </div>
+                    <a href="#" class="view-3d" onclick="showPlantDetails(11); return false;">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Plant Card 12 -->
+            <div class="plant-card" onclick="showPlantDetails(12)">
+                <div class="plant-image">
+                    <img src="https://images.unsplash.com/photo-1594381832295-4b12a6b6d0c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cardamom">
+                </div>
+                <div class="plant-info">
+                    <h3 class="plant-name">Cardamom</h3>
+                    <p class="plant-common">Elettaria cardamomum</p>
+                    <div class="plant-uses">
+                        <span class="use-tag">Digestive</span>
+                        <span class="use-tag">Breath Freshener</span>
+                        <span class="use-tag">Ayurveda</span>
+                    </div>
+                    <a href="#" class="view-3d" onclick="showPlantDetails(12); return false;">View Details</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Plant Detail Modal -->
+    <div id="plantDetailModal" class="plant-detail-modal">
+        <div class="plant-detail-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Plant Details</h2>
+                <button class="close-modal" onclick="hidePlantDetails()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="plant-header">
+                    <div class="plant-image-large">
+                        <img id="modalPlantImage" src="" alt="Plant Image">
+                    </div>
+                    <div class="plant-header-info">
+                        <h2 id="modalPlantName">Plant Name</h2>
+                        <p id="modalPlantScientific" class="plant-scientific">Scientific Name</p>
+                        <div id="modalPlantTags" class="plant-tags">
+                            <!-- Tags will be inserted here -->
+                        </div>
+                        <div class="plant-header-actions">
+                            <button class="action-btn"><i class="fas fa-bookmark"></i> Save</button>
+                            <button class="action-btn"><i class="fas fa-share-alt"></i> Share</button>
+                            <button class="action-btn"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="plant-details-section">
+                    <div class="detail-card">
+                        <h3><i class="fas fa-info-circle"></i> About</h3>
+                        <p id="modalPlantAbout">Plant description will appear here.</p>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h3><i class="fas fa-mortar-pestle"></i> Medicinal Uses</h3>
+                        <ul id="modalPlantUses">
+                            <!-- Uses will be inserted here -->
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h3><i class="fas fa-seedling"></i> Cultivation</h3>
+                        <p id="modalPlantCultivation">Cultivation information will appear here.</p>
+                    </div>
+                </div>
+                
+                <div class="model-viewer">
+                    <div class="model-placeholder">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="model-controls">
+                        <button class="control-btn"><i class="fas fa-undo"></i></button>
+                        <button class="control-btn"><i class="fas fa-search-plus"></i></button>
+                        <button class="control-btn"><i class="fas fa-search-minus"></i></button>
+                        <button class="control-btn"><i class="fas fa-sync"></i></button>
+                    </div>
+                </div>
+                
+                <div class="similar-plants">
+                    <h3><i class="fas fa-leaf"></i> Similar Plants</h3>
+                    <div class="similar-plants-grid">
+                        <!-- Similar plants will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <h3>Virtual Herbal Garden - AYUSH Medicinal Plants</h3>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Resources</a>
+            </div>
+            <p class="copyright">© 2023 Virtual Herbal Garden. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Plant data
+        const plants = [
+            {
+                id: 1,
+                name: "Tulsi",
+                botanicalName: "Ocimum tenuiflorum",
+                commonNames: ["Holy Basil", "Sacred Basil", "Tulasi"],
+                habitat: "Native to the Indian subcontinent, widely cultivated throughout Southeast Asia",
+                uses: [
+                    "Boosts immunity and fights infections",
+                    "Relieves stress and anxiety",
+                    "Treats respiratory conditions like cough and cold",
+                    "Improves digestion and metabolism",
+                    "Anti-inflammatory and antioxidant properties"
+                ],
+                cultivation: "Grows well in warm climates with full sun. Prefers well-drained soil. Can be grown from seeds or cuttings. Water regularly but avoid waterlogging.",
+                image: "https://images.unsplash.com/photo-1549069840-fca68e9b320f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                about: "Tulsi, or Holy Basil, is considered one of the most sacred plants in India. It has been used for thousands of years in Ayurvedic medicine for its diverse healing properties. Tulsi leaves are rich in antioxidants and essential oils that have antibacterial, antifungal, and anti-inflammatory properties.",
+                tags: ["Immunity", "Respiratory", "Adaptogen", "Ayurveda", "Antioxidant"]
+            },
+            {
+                id: 2,
+                name: "Amla",
+                botanicalName: "Phyllanthus emblica",
+                commonNames: ["Indian Gooseberry", "Amalaki", "Nelli"],
+                habitat: "Native to tropical and subtropical regions of the Indian subcontinent",
+                uses: [
+                    "Rich source of Vitamin C and antioxidants",
+                    "Boosts immunity and fights infections",
+                    "Improves digestion and metabolism",
+                    "Promotes hair growth and scalp health",
+                    "Supports liver function and detoxification"
+                ],
+                cultivation: "Grows in a variety of soils but prefers well-drained loam. Requires full sun. Drought-tolerant once established. Can be propagated from seeds or grafting.",
+                image: "https://images.unsplash.com/photo-1605801877042-9a4c1c2e0d5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                about: "Amla, or Indian Gooseberry, is one of the richest natural sources of Vitamin C. It has been used in Ayurvedic medicine for centuries to promote longevity and overall health. Amla is considered a powerful rejuvenative that helps nourish the tissues and promote healthy functioning of all body systems.",
+                tags: ["Immunity", "Antioxidant", "Digestive", "Hair Care", "Ayurveda"]
+            },
+            {
+                id: 3,
+                name: "Neem",
+                botanicalName: "Azadirachta indica",
+                commonNames: ["Indian Lilac", "Nimtree", "Margosa"],
+                habitat: "Native to the Indian subcontinent and parts of Southeast Asia",
+                uses: [
+                    "Powerful antibacterial and antifungal properties",
+                    "Treats skin conditions like acne and eczema",
+                    "Oral health - reduces plaque and gingivitis",
+                    "Natural insect repellent",
+                    "Supports blood purification and detoxification"
+                ],
+                cultivation: "Thrives in hot climates with full sun. Drought-tolerant and can grow in poor soils. Propagated from seeds or cuttings. Fast-growing tree that can reach up to 20 meters.",
+                image: "https://images.unsplash.com/photo-1587588354452-7a8f3fb74c0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                about: "Neem is often called the 'village pharmacy' in India due to its wide range of medicinal properties. Every part of the neem tree - leaves, flowers, seeds, bark, and oil - has medicinal applications. It is particularly valued for its ability to purify blood and treat skin diseases.",
+                tags: ["Skin Care", "Anti-inflammatory", "Antibacterial", "Blood Purifier", "Ayurveda"]
+            },
+            {
+                id: 4,
+                name: "Ashwagandha",
+                botanicalName: "Withania somnifera",
+                commonNames: ["Winter Cherry", "Indian Ginseng", "Poison Gooseberry"],
+                habitat: "Native to India, Nepal, and parts of China",
+                uses: [
+                    "Adaptogen that helps the body resist stress",
+                    "Improves brain function and memory",
+                    "Boosts energy levels and reduces fatigue",
+                    "Supports thyroid function",
+                    "Anti-inflammatory and antioxidant properties"
+                ],
+                cultivation: "Grows in dry regions with sandy soil and full sun. Drought-tolerant. Propagated from seeds. Roots are harvested after 6-12 months for medicinal use.",
+                image: "https://images.unsplash.com/photo-1594381890389-814f9a8a8b0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                about: "Ashwagandha, also known as Indian Ginseng, is one of the most important herbs in Ayurvedic medicine. It is classified as an adaptogen, meaning it helps the body resist physical and mental stress. Ashwagandha has been used for over 3,000 years to improve vitality and overall well-being.",
+                tags: ["Stress", "Adaptogen", "Energy", "Memory", "Ayurveda"]
+            },
+            {
+                id: 5,
+                name: "Turmeric",
+                botanicalName: "Curcuma longa",
+                commonNames: ["Curcuma", "Haridra", "Manjal"],
+                habitat: "Native to Southeast Asia and the Indian subcontinent",
+                uses: [
+                    "Powerful anti-inflammatory and antioxidant",
+                    "Relieves arthritis and joint pain",
+                    "Boosts brain function and memory",
+                    "Supports digestive health",
+                    "May help prevent certain cancers"
+                ],
+                cultivation: "Requires warm, humid climate with temperatures between 20-30°C. Prefers rich, well-drained soil. Propagated from rhizomes. Harvested after 7-10 months when leaves turn yellow.",
+                image: "https://images.unsplash.com/photo-1620921234393-3a058e2d98b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                about: "Turmeric has been used in Ayurvedic medicine for over 4,000 years. The active compound curcumin gives turmeric its distinctive yellow color and most of its health benefits. Turmeric is known for its potent anti-inflammatory effects and is often used to treat conditions like arthritis and digestive disorders.",
+                tags: ["Anti-inflammatory", "Joint Health", "Antioxidant", "Digestive", "Ayurveda"]
+            },
+            {
+                id: 6,
+                name: "Ginger",
+                botanicalName: "Zingiber officinale",
+                commonNames: ["Adrak", "Sunthi", "Inji"],
+                habitat: "Native to Southeast Asia and now cultivated in tropical regions worldwide",
+                uses: [
+                    "Relieves nausea and motion sickness",
+                    "Anti-inflammatory properties",
+                    "Improves digestion and relieves indigestion",
+                    "May help reduce muscle pain and soreness",
+                    "Lowers blood sugar levels"
+                ],
+                cultivation: "Requires warm, humid climate with partial shade. Prefers rich, well-drained soil. Propagated from rhizomes. Harvested after 8-10 months when leaves begin to yellow.",
+                image: "https://images.unsplash.com/photo-1519452635265-7b1fbfd1e3a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                about: "Ginger has been used in traditional medicine for thousands of years, particularly in Ayurveda and Traditional Chinese Medicine. It is known for its warming properties and ability to aid digestion. Ginger contains gingerol, a substance with powerful anti-inflammatory and antioxidant effects.",
+                tags: ["Digestive", "Nausea", "Anti-inflammatory", "Immunity", "Ayurveda"]
+            },
+            {
+                id: 7,
+                name: "Giloy",
+                botanicalName: "Tinospora cordifolia",
+                commonNames: ["Guduchi", "Amrita", "Heart-leaved Moonseed"],
+                habitat: "Native to tropical regions of India, Myanmar, and Sri Lanka",
+                uses: [
+                    "Boosts immunity and fights infections",
+                    "Reduces fever and inflammation",
+                    "Detoxifies the body",
+                    "Treats chronic conditions like diabetes",
+                    "Improves liver function"
+                ],
+                cultivation: "Thrives in warm, tropical climates with partial shade. Prefers well-drained soil. Propagated from stem cuttings. Can be harvested throughout the year.",
+                image: "https://images.unsplash.com/photo-1594381832295-4b12a6b6d0c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                about: "Giloy, also known as Guduchi or Amrita (nectar of immortality), is a powerful rejuvenative herb in Ayurveda. It is considered one of the best herbs for boosting immunity and fighting infections. Giloy helps to remove toxins from the body and is particularly useful in treating chronic conditions.",
+                tags: ["Immunity", "Fever", "Detox", "Anti-inflammatory", "Ayurveda"]
+            },
+            {
+                id: 8,
+                name: "Brahmi",
+                botanicalName: "Bacopa monnieri",
+                commonNames: ["Bacopa", "Water Hyssop", "Bacopa monnieri"],
+                habitat: "Native to wetlands in India, Nepal, Sri Lanka, Vietnam, and Taiwan",
+                uses: [
+                    "Enhances cognitive function and memory",
+                    "Reduces anxiety and stress",
+                    "Improves concentration and learning ability",
+                    "Treats ADHD and epilepsy",
+                    "Anti-inflammatory and antioxidant properties"
+                ],
+                cultivation: "Grows in shallow water or moist soil. Prefers full sun to partial shade. Propagated from seeds or cuttings. Can be harvested after 3-4 months of growth.",
+                image: "https://images.unsplash.com/photo-1594381890389-814f9a8a8b0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                about: "Brahmi has been used in Ayurvedic medicine for centuries to enhance cognitive function and memory. It is considered a brain tonic that nourishes the nervous system and improves mental clarity. Brahmi is also known for its calming properties and ability to reduce anxiety and stress.",
+                tags: ["Cognitive", "Memory", "Anxiety", "Nervous System", "Ayurveda"]
+            },
+            {
+                id: 9,
+                name: "Triphala",
+                botanicalName: "Amla, Bibhitaki, Haritaki",
+                commonNames: ["Three Fruits", "Amalaki, Bibhitaki, Haritaki"],
+                habitat: "Native to the Indian subcontinent",
+                uses: [
+                    "Gentle colon cleanser and digestive tonic",
+                    "Detoxifies the body",
+                    "Reduces inflammation",
+                    "Supports healthy metabolism",
+                    "Improves nutrient absorption"
+                ],
+                cultivation: "Each component fruit is cultivated separately. Amla prefers well-drained soil, Bibhitaki grows in various soils, and Haritaki thrives in tropical climates. Fruits are harvested when ripe.",
+                image: "https://images.unsplash.com/photo-1594381937-7948f3a0b3a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                about: "Triphala is a traditional Ayurvedic formulation consisting of three fruits: Amla (Indian Gooseberry), Bibhitaki (Bahera), and Haritaki (Chebulic Myrobalan). It is considered one of the most important herbal preparations in Ayurveda, used as a gentle detoxifier and rejuvenative that supports overall health.",
+                tags: ["Digestive", "Detox", "Anti-inflammatory", "Rejuvenative", "Ayurveda"]
+            },
+            {
+                id: 10,
+                name: "Licorice",
+                botanicalName: "Glycyrrhiza glabra",
+                commonNames: ["Mulethi", "Yashtimadhu", "Sweet Root"],
+                habitat: "Native to Europe, Asia, and the Middle East",
+                uses: [
+                    "Soothes respiratory conditions like cough and bronchitis",
+                    "Anti-inflammatory and antioxidant properties",
+                    "Supports adrenal function",
+                    "Balances hormones",
+                    "Treats ulcers and acid reflux"
+                ],
+                cultivation: "Prefers well-drained soil and full sun. Propagated from root cuttings. Harvested after 2-3 years of growth. The root is the medicinal part used.",
+                image: "https://images.unsplash.com/photo-1615875272961-5a6eb3b1f9a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                about: "Licorice has been used in Ayurvedic medicine for over 3,000 years. The sweet-tasting root contains glycyrrhizin, which has anti-inflammatory and immune-boosting properties. Licorice is particularly valued for its ability to soothe respiratory conditions and support adrenal function.",
+                tags: ["Respiratory", "Anti-inflammatory", "Adaptogen", "Digestive", "Ayurveda"]
+            },
+            {
+                id: 11,
+                name: "Fenugreek",
+                botanicalName: "Trigonella foenum-graecum",
+                commonNames: ["Methi", "Greek Hay", "Bird's Foot"],
+                habitat: "Native to the Mediterranean, Southern Europe, and Western Asia",
+                uses: [
+                    "Regulates blood sugar levels",
+                    "Improves digestion and relieves constipation",
+                    "Lowers cholesterol",
+                    "Reduces inflammation",
+                    "Increases milk production in breastfeeding mothers"
+                ],
+                cultivation: "Grows well in full sun and well-drained soil. Tolerant of various soil types. Propagated from seeds. Harvested when seeds are mature.",
+                image: "https://images.unsplash.com/photo-1594381832295-4b12a6b6d0c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                about: "Fenugreek has been used in Ayurvedic and traditional medicine for thousands of years. Both the seeds and leaves are used medicinally. Fenugreek is particularly known for its ability to regulate blood sugar levels and improve digestive health. It contains compounds that have anti-inflammatory and antioxidant properties.",
+                tags: ["Blood Sugar", "Digestive", "Anti-inflammatory", "Lactation", "Ayurveda"]
+            },
+            {
+                id: 12,
+                name: "Cardamom",
+                botanicalName: "Elettaria cardamomum",
+                commonNames: ["Elaichi", "Green Cardamom", "Elakka"],
+                habitat: "Native to the Indian subcontinent and Southeast Asia",
+                uses: [
+                    "Aids digestion and relieves indigestion",
+                    "Freshens breath and reduces oral bacteria",
+                    "Reduces nausea and motion sickness",
+                    "Anti-inflammatory properties",
+                    "May lower blood pressure"
+                ],
+                cultivation: "Thrives in tropical climates with partial shade. Prefers rich, well-drained soil. Propagated from seeds. Pods are harvested when mature and dried for use.",
+                image: "https://images.unsplash.com/photo-1594381832295-4b12a6b6d0c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                about: "Cardamom is one of the most valued spices in Ayurvedic medicine. Known as the 'Queen of Spices', it has been used for centuries to support digestion and freshen breath. Cardamom contains compounds that have antioxidant and anti-inflammatory properties. It is also used to treat respiratory conditions and as a natural breath freshener.",
+                tags: ["Digestive", "Breath Freshener", "Anti-inflammatory", "Nausea", "Ayurveda"]
+            }
+        ];
+
+        // Function to show plant details
+        function showPlantDetails(plantId) {
+            const plant = plants.find(p => p.id === plantId);
+            if (!plant) return;
+            
+            // Set modal content
+            document.getElementById('modalPlantImage').src = plant.image;
+            document.getElementById('modalPlantName').textContent = plant.name;
+            document.getElementById('modalPlantScientific').textContent = plant.botanicalName;
+            
+            // Set tags
+            const tagsContainer = document.getElementById('modalPlantTags');
+            tagsContainer.innerHTML = '';
+            plant.tags.forEach(tag => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'detail-tag';
+                tagElement.textContent = tag;
+                tagsContainer.appendChild(tagElement);
+            });
+            
+            // Set about text
+            document.getElementById('modalPlantAbout').textContent = plant.about;
+            
+            // Set uses
+            const usesList = document.getElementById('modalPlantUses');
+            usesList.innerHTML = '';
+            plant.uses.forEach(use => {
+                const li = document.createElement('li');
+                li.textContent = use;
+                usesList.appendChild(li);
+            });
+            
+            // Set cultivation info
+            document.getElementById('modalPlantCultivation').textContent = plant.cultivation;
+            
+            // Set similar plants
+            const similarPlantsGrid = document.querySelector('.similar-plants-grid');
+            similarPlantsGrid.innerHTML = '';
+            
+            // Find similar plants (same tags or same system)
+            const similarPlants = plants.filter(p => 
+                p.id !== plant.id && 
+                (p.tags.some(tag => plant.tags.includes(tag)) || p.name.includes('Ayurveda'))
+            ).slice(0, 4);
+            
+            similarPlants.forEach(similarPlant => {
+                const plantCard = document.createElement('div');
+                plantCard.className = 'similar-plant-card';
+                plantCard.onclick = () => showPlantDetails(similarPlant.id);
+                
+                plantCard.innerHTML = `
+                    <div class="similar-plant-image">
+                        <img src="${similarPlant.image}" alt="${similarPlant.name}">
+                    </div>
+                    <div class="similar-plant-info">
+                        <h4 class="similar-plant-name">${similarPlant.name}</h4>
+                        <p class="similar-plant-common">${similarPlant.botanicalName}</p>
+                    </div>
+                `;
+                
+                similarPlantsGrid.appendChild(plantCard);
+            });
+            
+            // Show modal
+            document.getElementById('plantDetailModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        }
+
+        // Function to hide plant details
+        function hidePlantDetails() {
+            document.getElementById('plantDetailModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('plantDetailModal');
+            if (event.target === modal) {
+                hidePlantDetails();
+            }
+        }
+
+        // Search functionality
+        document.querySelector('.search-box button').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-box input').value.toLowerCase().trim();
+            if (searchTerm === '') return;
+            
+            const filteredPlants = plants.filter(plant => {
+                return plant.name.toLowerCase().includes(searchTerm) ||
+                       plant.botanicalName.toLowerCase().includes(searchTerm) ||
+                       plant.commonNames.some(name => name.toLowerCase().includes(searchTerm)) ||
+                       plant.uses.some(use => use.toLowerCase().includes(searchTerm)) ||
+                       plant.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+            });
+            
+            // Update the grid with filtered plants
+            const plantsGrid = document.querySelector('.plants-grid');
+            plantsGrid.innerHTML = '';
+            
+            if (filteredPlants.length === 0) {
+                plantsGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 2rem;">No plants found matching your search. Try different keywords.</p>';
+            } else {
+                filteredPlants.forEach(plant => {
+                    const plantCard = document.createElement('div');
+                    plantCard.className = 'plant-card';
+                    plantCard.onclick = () => showPlantDetails(plant.id);
+                    
+                    plantCard.innerHTML = `
+                        <div class="plant-image">
+                            <img src="${plant.image}" alt="${plant.name}">
+                        </div>
+                        <div class="plant-info">
+                            <h3 class="plant-name">${plant.name}</h3>
+                            <p class="plant-common">${plant.botanicalName}</p>
+                            <div class="plant-uses">
+                                ${plant.tags.slice(0, 3).map(tag => `<span class="use-tag">${tag}</span>`).join('')}
+                            </div>
+                            <a href="#" class="view-3d" onclick="showPlantDetails(${plant.id}); return false;">View Details</a>
+                        </div>
+                    `;
+                    
+                    plantsGrid.appendChild(plantCard);
+                });
+            }
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filterType = this.textContent;
+                
+                // Filter plants based on the selected filter
+                let filteredPlants = [...plants]; // Start with all plants
+                
+                if (filterType === 'All Plants') {
+                    // Show all plants
+                } else if (filterType === 'Ayurveda' || filterType === 'Unani' || filterType === 'Siddha' || filterType === 'Homeopathy') {
+                    // Filter by AYUSH system
+                    filteredPlants = plants.filter(plant => 
+                        plant.tags.includes(filterType) || 
+                        plant.name.toLowerCase().includes(filterType.toLowerCase())
+                    );
+                } else {
+                    // Filter by health benefit
+                    filteredPlants = plants.filter(plant => 
+                        plant.tags.includes(filterType) || 
+                        plant.uses.some(use => use.toLowerCase().includes(filterType.toLowerCase()))
+                    );
+                }
+                
+                // Update the grid with filtered plants
+                const plantsGrid = document.querySelector('.plants-grid');
+                plantsGrid.innerHTML = '';
+                
+                filteredPlants.forEach(plant => {
+                    const plantCard = document.createElement('div');
+                    plantCard.className = 'plant-card';
+                    plantCard.onclick = () => showPlantDetails(plant.id);
+                    
+                    plantCard.innerHTML = `
+                        <div class="plant-image">
+                            <img src="${plant.image}" alt="${plant.name}">
+                        </div>
+                        <div class="plant-info">
+                            <h3 class="plant-name">${plant.name}</h3>
+                            <p class="plant-common">${plant.botanicalName}</p>
+                            <div class="plant-uses">
+                                ${plant.tags.slice(0, 3).map(tag => `<span class="use-tag">${tag}</span>`).join('')}
+                            </div>
+                            <a href="#" class="view-3d" onclick="showPlantDetails(${plant.id}); return false;">View Details</a>
+                        </div>
+                    `;
+                    
+                    plantsGrid.appendChild(plantCard);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

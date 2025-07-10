@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Herbal Garden - Virtual Tours</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            color: #2c3e50;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(90deg, #00897b, #00796b);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: #81c784;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: #00695c;
+            padding: 0.8rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #4db6ac;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .tours-header {
+            background: linear-gradient(rgba(0, 137, 123, 0.9), rgba(0, 121, 107, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="%2300897b"/></svg>');
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .tours-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .tours-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tours-intro {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .tours-intro p {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .tour-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 3rem;
+        }
+
+        .tour-card {
+            background: linear-gradient(135deg, #4db6ac, #26a69a);
+            border-radius: 15px;
+            overflow: hidden;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .tour-image {
+            flex: 1;
+            min-height: 180px;
+            background-color: #b2dfdb;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tour-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .tour-card:hover .tour-image img {
+            transform: scale(1.05);
+        }
+
+        .tour-info {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tour-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tour-description {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .start-tour {
+            display: inline-block;
+            background-color: white;
+            color: #00897b;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            align-self: flex-start;
+        }
+
+        .start-tour:hover {
+            background-color: #e0f2f1;
+            transform: scale(1.05);
+        }
+
+        .featured-plants {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .featured-plants h3 {
+            font-size: 1.5rem;
+            color: #00695c;
+            margin-bottom: 1rem;
+        }
+
+        .featured-plants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .featured-plant-card {
+            display: flex;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .featured-plant-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .featured-plant-image {
+            width: 100px;
+            flex-shrink: 0;
+        }
+
+        .featured-plant-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-plant-info {
+            padding: 1rem;
+            flex: 1;
+        }
+
+        .featured-plant-name {
+            font-weight: 600;
+            color: #00695c;
+            margin-bottom: 0.3rem;
+        }
+
+        .featured-plant-common {
+            font-style: italic;
+            font-size: 0.85rem;
+            color: #78909c;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background-color: #00695c;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: #b2dfdb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .tour-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-plants-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tours-header {
+                padding: 2rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tours-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-leaf"></i>
+            <h1>Virtual Herbal Garden</h1>
+        </div>
+        <p class="subtitle">Explore the world of AYUSH medicinal plants in an interactive 3D environment</p>
+    </header>
+    
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="plants.html">Plants</a>
+        <a href="#" class="active">Virtual Tours</a>
+        <a href="#">About AYUSH</a>
+        <a href="#">Resources</a>
+    </nav>
+    
+    <div class="container">
+        <section class="tours-header">
+            <h2>Virtual Tours</h2>
+            <p>Embark on guided journeys through our herbal gardens, exploring plants grouped by their health benefits and traditional uses in AYUSH systems.</p>
+        </section>
+        
+        <section class="tours-intro">
+            <p>Our virtual tours provide curated experiences that highlight specific themes and health benefits. Each tour includes interactive 3D models, detailed information about medicinal properties, and traditional uses in AYUSH systems. Choose a tour that interests you and begin your educational journey through the healing world of medicinal plants.</p>
+        </section>
+        
+        <section class="tour-grid">
+            <!-- Tour Card 1 -->
+            <div class="tour-card" onclick="window.location.href='immunity_tour.html'">
+                <div class="tour-image">
+                    <img src="images/immunity.jpg" alt="Immunity Plants">
+                </div>
+                <div class="tour-info">
+                    <h3 class="tour-title">Plants for Immunity</h3>
+                    <p class="tour-description">Discover powerful medicinal plants that boost your immune system and help fight infections. These natural remedies have been used for centuries in AYUSH systems to strengthen the body's defenses.</p>
+                    <a href="immunity_tour.html" class="start-tour">Start Tour <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Tour Card 2 -->
+            <div class="tour-card" onclick="window.location.href='digestive_tour.html'">
+                <div class="tour-image">
+                    <img src="images/digestive.png" alt="Digestive Health">
+                </div>
+                <div class="tour-info">
+                    <h3 class="tour-title">Digestive Health</h3>
+                    <p class="tour-description">Explore herbs that aid digestion, relieve common digestive issues, and promote gut wellness. These plants support a healthy digestive system according to traditional AYUSH practices.</p>
+                    <a href="digestive_tour.html" class="start-tour">Start Tour <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Tour Card 3 -->
+            <div class="tour-card" onclick="window.location.href='skin_tour.html'">
+                <div class="tour-image">
+                    <img src="images/skin.jpg" alt="Skin Care">
+                </div>
+                <div class="tour-info">
+                    <h3 class="tour-title">Natural Skin Care</h3>
+                    <p class="tour-description">Discover the healing power of nature with these traditional herbs used for centuries to nourish, protect, and rejuvenate the skin according to AYUSH traditions.</p>
+                    <a href="skin_tour.html" class="start-tour">Start Tour <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="featured-plants">
+            <h3>Featured Plants</h3>
+            <div class="featured-plants-grid">
+                <!-- Featured Plant 1 -->
+                <div class="featured-plant-card">
+                    <div class="featured-plant-image">
+                        <img src="images/tulsi.jpg" alt="Tulsi">
+                    </div>
+                    <div class="featured-plant-info">
+                        <h4 class="featured-plant-name">Tulsi</h4>
+                        <p class="featured-plant-common">Ocimum tenuiflorum</p>
+                        <span class="use-tag" style="background-color: #e0f2f1; color: #00695c; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem;">Immunity</span>
+                    </div>
+                </div>
+                
+                <!-- Featured Plant 2 -->
+                <div class="featured-plant-card">
+                    <div class="featured-plant-image">
+                        <img src="images/amla.jpg" alt="Amla">
+                    </div>
+                    <div class="featured-plant-info">
+                        <h4 class="featured-plant-name">Amla</h4>
+                        <p class="featured-plant-common">Phyllanthus emblica</p>
+                        <span class="use-tag" style="background-color: #e0f2f1; color: #00695c; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem;">Digestive</span>
+                    </div>
+                </div>
+                
+                <!-- Featured Plant 3 -->
+                <div class="featured-plant-card">
+                    <div class="featured-plant-image">
+                        <img src="images/neem.jpg" alt="Neem">
+                    </div>
+                    <div class="featured-plant-info">
+                        <h4 class="featured-plant-name">Neem</h4>
+                        <p class="featured-plant-common">Azadirachta indica</p>
+                        <span class="use-tag" style="background-color: #e0f2f1; color: #00695c; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem;">Skin Care</span>
+                    </div>
+                </div>
+                
+                <!-- Featured Plant 4 -->
+                <div class="featured-plant-card">
+                    <div class="featured-plant-image">
+                        <img src="images/ashwagandha.jpg" alt="Ashwagandha">
+                    </div>
+                    <div class="featured-plant-info">
+                        <h4 class="featured-plant-name">Ashwagandha</h4>
+                        <p class="featured-plant-common">Withania somnifera</p>
+                        <span class="use-tag" style="background-color: #e0f2f1; color: #00695c; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem;">Stress</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <h3>Virtual Herbal Garden - AYUSH Medicinal Plants</h3>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Resources</a>
+            </div>
+            <p class="copyright">© 2023 Virtual Herbal Garden. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
