@@ -12,8 +12,6 @@ A web-based interactive platform to explore medicinal plants used in traditional
 * 🎨 **Immersive Garden Aesthetic**
 * 📦 **Modular Design** using HTML, CSS, JS, and JSON
 * 🔗 **Category-based Navigation** (e.g., Skin Care, Immunity)
-* 🔊 Optional **audio playback** for each plant
-
 ---
 
 ### 📁 Folder Structure
