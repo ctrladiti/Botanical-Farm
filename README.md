@@ -6,12 +6,13 @@ A web-based interactive platform to explore medicinal plants used in traditional
 
 ### 🧠 Features
 
-* 🔍 **Searchable & Filterable Categories**
-* 🎠 **Interactive Carousel** with smooth transitions
-* 🪴 **Plant Detail Modals** with audio, image, and full info
-* 🎨 **Immersive Garden Aesthetic**
-* 📦 **Modular Design** using HTML, CSS, JS, and JSON
-* 🔗 **Category-based Navigation** (e.g., Skin Care, Immunity)
+- 🔍 **Searchable & Filterable Categories**
+- 🎠 **Interactive Carousel** with smooth transitions
+- 🪴 **Plant Detail Modals** with audio, image, and full info
+- 🎨 **Immersive Garden Aesthetic**
+- 📦 **Modular Design** using HTML, CSS, JS, and JSON
+- 🔗 **Category-based Navigation** (e.g., Skin Care, Immunity)
+
 ---
 
 ### 📁 Folder Structure
@@ -55,11 +56,11 @@ VirtualHerbalGarden/
 
 2. **Open `index.html` in any browser**
 
-   * Double-click the file or serve with Live Server.
+   - Double-click the file or serve with Live Server.
 
 3. **Explore!**
 
-   * Use the navigation to browse categories and plant information.
+   - Use the navigation to browse categories and plant information.
 
 > 📌 No backend or server setup needed. This project runs fully in the browser using static assets.
 
@@ -99,21 +100,15 @@ Each category entry:
 
 ### ✨ Customization
 
-* ✅ Add more plants: just add new entries in `plants.json`.
-* ✅ Add categories: update `categories.json` and ensure matching `slug` in plants.
-* ✅ Add images and audio: place files inside `/images/` and `/audio/`.
+- ✅ Add more plants: just add new entries in `plants.json`.
+- ✅ Add categories: update `categories.json` and ensure matching `slug` in plants.
+- ✅ Add images and audio: place files inside `/images/` and `/audio/`.
 
 ---
 
 ### 📌 Credits
 
-* Designed and developed by \[Your Name]
-* Plant data references: Ministry of AYUSH, NMPB, and open herbal knowledge
-* Icons: [Font Awesome](https://fontawesome.com/)
-* Fonts: Google Fonts
-
----
-
-### 📄 License
-
-This project is for educational and awareness purposes under [Creative Commons Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/).
+- Designed and developed by \[Aditi Agrawal]
+- Plant data references: Ministry of AYUSH, NMPB, and open herbal knowledge
+- Icons: [Font Awesome](https://fontawesome.com/)
+- Fonts: Google Fonts
