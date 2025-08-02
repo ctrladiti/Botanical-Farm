@@ -1,21 +1,21 @@
-## 🌿 Virtual Herbal Garden
+## Virtual Herbal Garden
 
 A web-based interactive platform to explore medicinal plants used in traditional Indian healing systems (AYUSH – Ayurveda, Yoga, Unani, Siddha, and Homeopathy). The garden allows users to browse plants by category, view 3D-style carousels, and learn their uses, habitats, and botanical names.
 
 ---
 
-### 🧠 Features
+### Features
 
-- 🔍 **Searchable & Filterable Categories**
-- 🎠 **Interactive Carousel** with smooth transitions
-- 🪴 **Plant Detail Modals** with audio, image, and full info
-- 🎨 **Immersive Garden Aesthetic**
-- 📦 **Modular Design** using HTML, CSS, JS, and JSON
-- 🔗 **Category-based Navigation** (e.g., Skin Care, Immunity)
+- **Searchable & Filterable Categories**
+- **Interactive Carousel** with smooth transitions
+- **Plant Detail Modals** with audio, image, and full info
+- **Immersive Garden Aesthetic**
+- **Modular Design** using HTML, CSS, JS, and JSON
+- **Category-based Navigation** (e.g., Skin Care, Immunity)
 
 ---
 
-### 📁 Folder Structure
+### Folder Structure
 
 ```
 VirtualHerbalGarden/
@@ -45,7 +45,7 @@ VirtualHerbalGarden/
 
 ---
 
-### 🚀 How to Run Locally
+### How to Run Locally
 
 1. **Clone this repository**
 
@@ -62,13 +62,13 @@ VirtualHerbalGarden/
 
    - Use the navigation to browse categories and plant information.
 
-> 📌 No backend or server setup needed. This project runs fully in the browser using static assets.
+> No backend or server setup needed. This project runs fully in the browser using static assets.
 
 ---
 
-### 🪷 Data Files
+### Data Files
 
-#### 📁 `plants.json`
+#### `plants.json`
 
 Each plant has:
 
@@ -84,7 +84,7 @@ Each plant has:
 }
 ```
 
-#### 📁 `categories.json`
+#### `categories.json`
 
 Each category entry:
 
@@ -98,15 +98,15 @@ Each category entry:
 
 ---
 
-### ✨ Customization
+### Customization
 
-- ✅ Add more plants: just add new entries in `plants.json`.
-- ✅ Add categories: update `categories.json` and ensure matching `slug` in plants.
-- ✅ Add images and audio: place files inside `/images/` and `/audio/`.
+- Add more plants: just add new entries in `plants.json`.
+- Add categories: update `categories.json` and ensure matching `slug` in plants.
+- Add images and audio: place files inside `/images/` and `/audio/`.
 
 ---
 
-### 📌 Credits
+### Credits
 
 - Designed and developed by \[Aditi Agrawal]
 - Plant data references: Ministry of AYUSH, NMPB, and open herbal knowledge
