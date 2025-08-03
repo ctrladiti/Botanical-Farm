@@ -104,11 +104,3 @@ Each category entry:
 - Add categories: update `categories.json` and ensure matching `slug` in plants.
 - Add images and audio: place files inside `/images/` and `/audio/`.
 
----
-
-### Credits
-
-- Designed and developed by \[Aditi Agrawal]
-- Plant data references: Ministry of AYUSH, NMPB, and open herbal knowledge
-- Icons: [Font Awesome](https://fontawesome.com/)
-- Fonts: Google Fonts
